@@ -10,18 +10,18 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const isPro = JSON.parse(process.env.NODE_ENV || '0') === 1;
 console.log("mode: ", isPro);
 const plugins = [
-  new CleanWebpackPlugin(['dist', 'build'], {
+  new CleanWebpackPlugin(['public'], {
     root: __dirname,
     verbose: true,
     dry: false,
-    exclude: ['shared.js']
+    exclude: ['assets']
   }),
   new HtmlWebpackPlugin({
     filename: 'index.html',
     template: __dirname + '/client/index.html'
   }),
   new ExtractTextPlugin({
-    filename: '[name].bundle.css',
+    filename: isPro ? 'bundle.min.css' : 'bundle.css',
     allChunks: true,
   }),
 ];
@@ -92,9 +92,9 @@ const rules = [
 ];
 
 module.exports = {
-  entry: ['./client/app/app.js', './client/assets/css/app.scss'],
+  entry: ['./client/app/app.js', './client/css/app.scss'],
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
     filename: isPro ?  'bundle.min.js' : 'bundle.js',
   },
   module: {rules: rules},
