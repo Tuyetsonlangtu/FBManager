@@ -1,4 +1,8 @@
 # Facebook management system
+- User can post aticle to many FB Account
+- Manager notification
+- Manager message
+- Manager comment
 
 #install
 - npm install
