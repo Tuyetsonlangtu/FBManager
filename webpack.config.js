@@ -18,7 +18,7 @@ const plugins = [
   }),
   new HtmlWebpackPlugin({
     filename: 'index.html',
-    template: __dirname + '/client/index.html'
+    template: __dirname + '/client/index.jade'
   }),
   new ExtractTextPlugin({
     filename: isPro ? 'bundle.min.css' : 'bundle.css',
@@ -88,11 +88,15 @@ const rules = [
   {
     test: /\.(sass|scss)$/,
     loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
+  },
+  {
+    test: /\.jade$/,
+    loader: 'jade-loader'
   }
 ];
 
 module.exports = {
-  entry: ['./client/app/app.js', './client/css/app.scss'],
+  entry: ['./client/src/main.js', './client/src/assets/css/app.scss'],
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: isPro ?  'bundle.min.js' : 'bundle.js',
